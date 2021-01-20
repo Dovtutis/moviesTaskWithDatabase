@@ -8,7 +8,6 @@ class DB
     private $password = '';
     private $databaseName = 'movies_database';
     public $connection;
-    public $status;
 
     public function __construct()
     {
@@ -26,16 +25,7 @@ class DB
         VALUES ('$image', '$title', '$year', '$genre')
         ";
 
-        $this->makeQuery($sql, 'Filmas pridėtas sėkmingai');
-    }
-
-    private function makeQuery($sql, $msg)
-    {
-        if ($this->connection->query($sql) === TRUE) {
-            $this->status =  "<h2 class='status'>$msg</h2>";
-        } else {
-            $this->status =  "<h2 class='status'>Klaida: {$this->connection->error}</h2>";
-        }
+        $this->connection->query($sql);
     }
 
     public function getMovies()
@@ -45,8 +35,6 @@ class DB
 
         if ($mysqliResultObj->num_rows>0){
             return $mysqliResultObj->fetch_all(MYSQLI_ASSOC);
-        }else {
-            $this->status =  "<h2 class='status'>Klaida: nerasta duomenų</h2>";
         }
     }
 }

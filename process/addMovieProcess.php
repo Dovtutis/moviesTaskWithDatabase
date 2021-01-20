@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     if (empty($errors)){
         $db->addMovie($image, $title, $year, $genre);
         header('Content-Type:application/json');
-        echo $jsonResponse = json_encode('Movie added');
+        echo $jsonResponse = json_encode('Movie added successfully');
     } else{
         $jsonResponse['errors'] = $errors;
         header('Content-Type:application/json');

@@ -72,6 +72,9 @@ require "./inc/footer.php";
                 if (data.errors){
                     displayErrorsJs(data.errors);
                 }
+                if (data === 'Movie added successfully'){
+                    location.replace("./index.php");
+                }
             }).catch(error => console.error(error.message));
 
         function displayErrorsJs(errors){
