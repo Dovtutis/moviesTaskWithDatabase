@@ -31,7 +31,7 @@ require "./inc/footer.php";
             method: 'GET'
         });
         const respData = await resp.json();
-
+        movieContainer.innerHTML = '';
         respData.map(item =>{
             movieContainer.innerHTML +=
                 `
