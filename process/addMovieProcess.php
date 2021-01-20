@@ -1,6 +1,7 @@
 <?php
 require "../Class/DB.php";
 define('REQUIRED_FIELD_ERROR', 'This field is required');
+$connection = mysqli_connect('localhost', 'root', '', 'movies_database');
 $db = new DB();
 $errors = [];
 $image = '';
@@ -11,6 +12,8 @@ $genre = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $image = post_data("image");
     $title = post_data("title");
+    $image = mysqli_real_escape_string($connection, $image);
+    $title = mysqli_real_escape_string($connection, $title);
     $year = post_data("year");
     $genre = post_data("genre");
 
