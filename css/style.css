@@ -78,6 +78,7 @@ main {
     padding: 0.5rem 1rem 1rem;
     color: #eeeeee;
     letter-spacing: 0.5px;
+    position: relative;
 }
 
 .invalid-feedback{
@@ -110,7 +111,36 @@ main {
     font-size: 1.1rem;
 }
 
+.editDeleteBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.editDeleteBar a {
+    color: #FFFFFF;
+    transition: 0.3s;
+}
+
+.editDeleteBar a:hover {
+    color: #a3dff3;
+}
+
 
 .error-input {
     background-color: rgba(255, 54, 54, 0.4);
+}
+
+.error-message {
+    color: #ff6347;
+    font-weight: 600;
+}
+
+.deleteMovieBtn {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.deleteMovieBtn:hover {
+    color: #a3dff3;
 }

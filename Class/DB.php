@@ -37,4 +37,36 @@ class DB
             return $mysqliResultObj->fetch_all(MYSQLI_ASSOC);
         }
     }
+
+    public function getMovie($id)
+    {
+        $sql = "SELECT * FROM `movies` WHERE `id` = '$id'";
+        $mysqliResultObj = $this->connection->query($sql);
+
+        if ($mysqliResultObj->num_rows>0){
+            return $mysqliResultObj->fetch_assoc();
+        }
+    }
+
+    public function editMovie($image, $title, $year, $genre, $id)
+    {
+        $sql = "
+        UPDATE movies 
+        SET `img` = '$image', `title` = '$title', `year` = '$year', `genre` = '$genre' 
+        WHERE `id` = '$id'  
+        LIMIT 1 
+        ";
+
+        $this->connection->query($sql);
+    }
+
+    public function deleteMovie($id)
+    {
+        $sql = "DELETE FROM `movies` WHERE `id` = '$id' LIMIT 1";
+        $this->connection->query($sql);
+    }
+
+    public function closeConnection(){
+        $this->connection->close();
+    }
 }

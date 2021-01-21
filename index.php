@@ -3,9 +3,7 @@ require "./Class/DB.php";
 require "./inc/head.php";
 ?>
 
-<main id="main">
-
-</main>
+<main id="main"></main>
 
 <?php
 require "./inc/footer.php";
@@ -24,6 +22,7 @@ require "./inc/footer.php";
     addMoviePageBtn.addEventListener('click', ()=>{
         location.replace("./addMovies.php");
     })
+
     loadMoviesFetch ();
 
     async function loadMoviesFetch (){
@@ -39,7 +38,13 @@ require "./inc/footer.php";
                 <img src="${item['img']}" alt="${item['title']}?>">
                 <div class="movie-info">
                     <div>
-                        <h5>${item['title']}</h5>
+                        <div>
+                            <h5>${item['title']} </h5>
+                        </div>
+                        <div class="editDeleteBar">
+                            <div><i class="fas fa-trash-alt deleteMovieBtn" id="${item['id']}"></i></div>
+                            <a href="addMovies.php?edit=1&id=${item['id']}" class="d-block"><i class="fas fa-edit"></i></a>
+                        </div>
                     </div>
                     <div>
                         <h6>${item['year']}</h6>
@@ -51,6 +56,24 @@ require "./inc/footer.php";
             </div>
             `
         })
+        const deleteButton = document.querySelectorAll('.deleteMovieBtn').forEach(item=> {
+            item.addEventListener('click', deleteMovieFetch);
+        });
+    }
+
+    async function deleteMovieFetch (event) {
+        let id = event.target.id;
+        const options = {
+            method: 'GET',
+        }
+        await fetch(`./process/deleteMovieProcess.php?id=${id}`, options)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (data === 'Movie deleted successfully'){
+                    location.replace("./index.php");
+                }
+            }).catch(error => console.error(error.message));
     }
 
 </script>
